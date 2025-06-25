@@ -1,3 +1,4 @@
+import httpx
 from fastapi import APIRouter
 from pydantic import BaseModel
 
@@ -8,5 +9,12 @@ class PromptRequest(BaseModel):
 
 @router.post("/chat")
 async def receive_prompt(data: PromptRequest):
-    # For now, just return what was received
-    return {"received_prompt": data.prompt}
+    async with httpx.AsyncClient() as client:
+        # Convert Pydantic model to dict before sending
+        response = await client.post(
+            "http://127.0.0.1:8000/chatbot/",
+            json={"user_query": data.prompt}  # Use data.prompt (string), or data.dict()
+        )
+
+        response.raise_for_status()
+        return response.json()
