@@ -2,7 +2,7 @@ from intent_classifier import classify_intent
 from faq_static_bot import handle_static_response
 from db_query_handler import handle_db_query
 
-def handle_user_query(user_query: str):
+async def handle_user_query(user_query: str):
     intent = classify_intent(user_query)
     print(f"[Intent Detected]: {intent}")
 
@@ -10,7 +10,7 @@ def handle_user_query(user_query: str):
         return handle_static_response(user_query)
     
     elif intent == "db_query":
-        return handle_db_query(user_query)
+        return await handle_db_query(user_query)
 
     else:
         return "Sorry, I couldn't understand your query."

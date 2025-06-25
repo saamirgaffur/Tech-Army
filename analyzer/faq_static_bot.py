@@ -37,7 +37,7 @@ def handle_static_response(user_query: str) -> str:
 
     try:
         response = openai.chat.completions.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a friendly internal chatbot."},
                 {"role": "user", "content": prompt}
