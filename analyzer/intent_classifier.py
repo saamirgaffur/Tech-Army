@@ -25,7 +25,7 @@ Return only one: static_response, db_query, or fallback.
 """
 
     response = openai.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You classify chatbot queries into one of three intents."},
             {"role": "user", "content": prompt}

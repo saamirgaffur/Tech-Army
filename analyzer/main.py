@@ -16,7 +16,7 @@ class QueryResponse(BaseModel):
 async def chat_with_bot(query: QueryRequest):
     try:
         # Call the function from backend.py to process the user query
-        response = handle_user_query(query.user_query)
+        response = await handle_user_query(query.user_query)
         return QueryResponse(response=response)
     except Exception as e:
         # If something goes wrong, return an error message
